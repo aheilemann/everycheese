@@ -16,8 +16,10 @@ WORKDIR /code
 
 #install requirements
 RUN pip install --upgrade pip
-COPY requirements.txt /code/
-RUN pip install -r requirements.txt
+RUN mkdir requirements
+COPY requirements/base.txt /code/requirements/
+COPY requirements/local.txt /code/requirements/
+RUN pip install -r requirements/local.txt
 
 #copy project
 COPY . /code/

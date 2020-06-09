@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db:
+  postgres:
     image: postgres
     env_file:
       - db.env
@@ -13,4 +13,6 @@ services:
     ports:
      - "8000:8000"
     depends_on:
-     - db
+     - postgres
+    env_file:
+      - db.env

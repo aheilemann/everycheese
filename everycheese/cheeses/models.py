@@ -3,6 +3,7 @@ from django.db import models
 from autoslug import AutoSlugField
 from model_utils.models import TimeStampedModel
 from django.utils.translation import gettext_lazy as _
+from django_countries.fields import CountryField
 # Create your models here.
 
 
@@ -13,6 +14,9 @@ class Cheese(TimeStampedModel):
                          always_update=False,
                          populate_from="name")
     description = models.TextField("Description", blank=True)
+    country_of_origin = CountryField(
+        "Country of Origin", blank=True
+    )
 
     class Firmness(models.TextChoices):
         UNSPECIFIED = "unspecified", _("Unspecified")

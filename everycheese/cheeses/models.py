@@ -1,11 +1,11 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 from django_countries.fields import CountryField
+from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from autoslug import AutoSlugField
 from model_utils.models import TimeStampedModel
-# Create your models here.
 
 
 class Cheese(TimeStampedModel):
@@ -29,6 +29,12 @@ class Cheese(TimeStampedModel):
     firmness = models.CharField("Firmness", max_length=20,
                                 choices=Firmness.choices,
                                 default=Firmness.UNSPECIFIED)
+
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return self.name
